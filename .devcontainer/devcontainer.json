@@ -1,0 +1,14 @@
+{
+  "name": "COOCA WhatsApp Gateway",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:20",
+  "forwardPorts": [3000],
+  "portsAttributes": {
+    "3000": {
+      "label": "WhatsApp Gateway API",
+      "onAutoForward": "openBrowserOnce",
+      "visibility": "public"
+    }
+  },
+  "postCreateCommand": "npm install",
+  "postStartCommand": "npm start"
+}

@@ -1,0 +1,28 @@
+# ==============================================================================
+# Render.com Blueprint Specification for COOCA WhatsApp Gateway
+# Docs: https://render.com/docs/blueprint-spec
+# ==============================================================================
+services:
+  - type: web
+    name: cooca-wa-server
+    runtime: node
+    plan: free # Change to 'starter' if you want to attach a Render Persistent Disk
+    region: singapore # singapore (ap-southeast-1), oregon (us-west), frankfurt (eu-central), or ohio (us-east)
+    buildCommand: npm install --omit=dev
+    startCommand: npm start
+    healthCheckPath: /health
+    autoDeploy: true
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: WA_WORKER_TOKEN
+        generateValue: true # Generates a secure random 32-char token on Render
+      - key: LARAVEL_API_URL
+        sync: false # Set your Laravel URL in Render Dashboard (e.g. https://app.cooca.id)
+      # Optional: Uncomment below if using Render Starter Plan with Persistent Disk ($0.25/month)
+      # - key: AUTH_DIR
+      #   value: /var/data/baileys_auth
+    # disk:
+    #   name: wa-auth-data
+    #   mountPath: /var/data
+    #   sizeGB: 1

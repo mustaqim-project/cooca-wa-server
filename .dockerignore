@@ -1,0 +1,9 @@
+node_modules
+.baileys_auth
+.wwebjs_auth
+.wwebjs_cache
+.git
+.env
+logs
+*.log
+npm-debug.log*

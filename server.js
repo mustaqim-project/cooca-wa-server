@@ -35,8 +35,38 @@ manager.initSession('default').catch(err => {
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, x-device-token');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, x-device-token, x-worker-token');
     if (req.method === 'OPTIONS') return res.sendStatus(200);
+    next();
+});
+
+// Security: Token Authentication Middleware for API endpoints
+app.use((req, res, next) => {
+    // Selalu izinkan health check dan info publik tanpa token
+    if (req.path === '/' || req.path === '/health') {
+        return next();
+    }
+
+    // Jika worker token belum diatur atau masih default di lingkungan development, izinkan
+    if (!WA_WORKER_TOKEN || WA_WORKER_TOKEN === 'secret-worker-token') {
+        return next();
+    }
+
+    const authHeader = req.headers['authorization'];
+    const customHeader = req.headers['x-worker-token'] || req.headers['x-device-token'];
+    const bearerToken = (authHeader && authHeader.startsWith('Bearer ')) ? authHeader.slice(7) : null;
+    const bodyToken = req.body?.token;
+    const queryToken = req.query?.token;
+
+    const providedToken = bearerToken || customHeader || bodyToken || queryToken;
+
+    if (!providedToken || providedToken !== WA_WORKER_TOKEN) {
+        return res.status(401).json({
+            success: false,
+            error: 'Unauthorized: Missing or invalid worker token'
+        });
+    }
+
     next();
 });
 

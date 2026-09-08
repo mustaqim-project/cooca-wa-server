@@ -38,7 +38,7 @@ Gateway ini menggunakan koneksi **Direct WebSocket murni** langsung ke server Wh
 ```text
 ┌─────────────────────────────────────────────────────────────────┐
 │                     BACKEND LARAVEL (HOSTINGER)                 │
-│   Domain: https://app.cooca.id                                  │
+│   Domain: https://umkm.cooca.id                                 │
 │   Database: MySQL                                               │
 │   Tugas: POS, Kasir, CRM, Invoice, Blast Scheduler              │
 └────────────────────────────────┬────────────────────────────────┘
@@ -85,7 +85,7 @@ GitHub Codespaces menyediakan virtual machine gratis (2 vCPU, 4 GB RAM, 32 GB St
    ```env
    PORT=3000
    WA_WORKER_TOKEN=cooca_secret_worker_token_2026
-   LARAVEL_API_URL=https://app.cooca.id
+   LARAVEL_API_URL=https://umkm.cooca.id
    ```
 6. Jalankan server:
    ```bash
@@ -128,7 +128,7 @@ Metode terbaik untuk production jangka panjang 24/7.
    ```env
    PORT=3000
    WA_WORKER_TOKEN=cooca_secret_worker_token_2026
-   LARAVEL_API_URL=https://app.cooca.id
+   LARAVEL_API_URL=https://umkm.cooca.id
    ```
    Simpan dengan `Ctrl + O`, `Enter`, lalu `Ctrl + X`.
 5. Restart service via PM2:
@@ -158,7 +158,7 @@ Metode terbaik untuk production jangka panjang 24/7.
 4. Pada tab **Environment Variables**, tambahkan:
    - `NODE_ENV` = `production`
    - `WA_WORKER_TOKEN` = `cooca_secret_worker_token_2026`
-   - `LARAVEL_API_URL` = `https://app.cooca.id`
+   - `LARAVEL_API_URL` = `https://umkm.cooca.id`
 5. Pada **Advanced** $\rightarrow$ Isi **Health Check Path:** `/health`.
 6. Klik **Create Web Service**. URL Anda akan menjadi:
    👉 `https://cooca-wa-server.onrender.com`
@@ -248,7 +248,7 @@ Semua request (kecuali `/health` dan `/`) wajib menyertakan header:
   ```json
   {
     "sessionId": "biz_12345678",
-    "webhookUrl": "https://app.cooca.id/api/wa/webhook"
+    "webhookUrl": "https://umkm.cooca.id/api/wa/webhook"
   }
   ```
 
@@ -291,7 +291,7 @@ Semua request (kecuali `/health` dan `/`) wajib menyertakan header:
     "session": "biz_12345678",
     "target": "6281234567890",
     "message": "Faktur Penjualan #INV-001",
-    "mediaUrl": "https://app.cooca.id/storage/invoices/INV-001.pdf",
+    "mediaUrl": "https://umkm.cooca.id/storage/invoices/INV-001.pdf",
     "filename": "Faktur-INV-001.pdf"
   }
   ```

@@ -18,7 +18,7 @@ services:
       - key: WA_WORKER_TOKEN
         generateValue: true # Generates a secure random 32-char token on Render
       - key: LARAVEL_API_URL
-        sync: false # Set your Laravel URL in Render Dashboard (e.g. https://app.cooca.id)
+        sync: false # Set your Laravel URL in Render Dashboard (e.g. https://umkm.cooca.id)
       # Optional: Uncomment below if using Render Starter Plan with Persistent Disk ($0.25/month)
       # - key: AUTH_DIR
       #   value: /var/data/baileys_auth
